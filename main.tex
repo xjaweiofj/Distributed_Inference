@@ -1,0 +1,238 @@
+
+
+%%
+%% This is file `sample-sigconf.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,sigconf')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+\documentclass[sigconf]{acmart}
+
+
+
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx, subcaption, comment}
+\usepackage{textcomp}
+\usepackage{makecell}
+\usepackage{threeparttable}
+\usepackage{tablefootnote}
+
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+
+\begin{document}
+
+
+
+
+%%
+%% If your work has an appendix, this is the place to put it.
+\appendix
+
+
+
+\section{Proof for the bound of $P_{m=1}^{\:detect,\mathit{diff}}$}
+\label{appendix:proof_diff}
+
+For simplicity, in this appendix we denote the redundancy overhead $r_{l,i}$  as $r$, and the number of devices $N_l$ as $N$. 
+$r\in (0,1)$, $N\in [2, +\infty)$, $N\in Z$
+
+\begin{equation}
+\begin{split}
+P_{m=1}^{\:detect,\mathit{diff}} &= P_{m=1}^{\:detect, cen}-P_{m=1}^{\:detect, ind} \\
+&= r - 1 + (1-\frac{r}{N-1})^{({N}-1)} \\
+\end{split}
+\end{equation}
+Assume $x=N-1$, then $x\in [1, +\infty)$, $x\in Z$, then:
+\begin{equation}
+\begin{split}
+P_{m=1}^{\:detect,\mathit{diff}} &= r - 1 + (1-\frac{r}{x})^{x} \\
+\end{split}
+\end{equation}
+Assume $g(x,r) = r - 1 + (1-\frac{r}{x})^{x}$, $f(x,r) = (1-\frac{r}{x})^{x}$. Because $\frac{r}{x} \in (0,1)$, then $1-\frac{r}{x} \in (0,1)$, therefore $f(x,r)=(1-\frac{r}{x})^{x} \in (0,1)$.
+\begin{equation}
+\begin{split}
+\ln f(x,r) &= x\; \ln (1-\frac{r}{x}) \\
+\intertext{Derive both sides of equations with x:}
+\frac{\frac{df(x,r)}{dx}}{f(x,r)} &= \ln (1-\frac{r}{x}) + x\; \frac{r}{x^2} \frac{1}{1-\frac{r}{x}} \\
+&= \ln (1-\frac{r}{x}) + \frac{r}{x-r} \\
+\end{split}
+\end{equation}
+\begin{equation}
+\label{eq:fandh}
+\begin{split}
+{\frac{df(x,r)}{dx}} &= f(x,r) \left(\ln (1-\frac{r}{x}) + \frac{r}{x-r}\right) \\
+\end{split}
+\end{equation}
+Assume $h(x,r) = \ln (1-\frac{r}{x}) + \frac{r}{x-r}$
+\begin{equation}
+\begin{split}
+\frac{dh(x,r)}{dx} &= \frac{1}{1-\frac{r}{x}} (-1)(-\frac{r}{x^2}) - \frac{r}{(x-r)^2} \\
+%&= \frac{r}{x(x-r)} - \frac{r}{(x-r)^2} \\
+%&= \frac{r(x-r) - rx}{x(x-r)^2} \\
+%&= \frac{rx-r^2 - rx}{x(x-r)^2} \\
+&= \frac{-r^2}{x(x-r)^2} \\
+\end{split}
+\end{equation}
+Clearly, $\frac{dh(x,r)}{dx} < 0$, this indicates $h(x,r)$ monotonically decreas with the increase of $x$, when $x\in [1, +\infty)$, $x\in Z$. Therefore, we know:
+\begin{equation}
+\begin{split}
+h(x,r)_{min} &= h(x,r)_{x\rightarrow +\infty} \\
+&= \ln (1^-) + 0^+ \\
+&= 0\\
+\end{split}
+\end{equation}
+Thus $h(x,r) > 0$ is always true when $x\in [1, +\infty)$, $x\in Z$, and $r\in (0,1)$.
+
+From Eq. \ref{eq:fandh}:
+\begin{equation}
+\begin{split}
+{\frac{df(x,r)}{dx}} &= f(x,r) \cdot h(x,r) \\
+\end{split}
+\end{equation}
+As it is proven that $h(x,r) > 0$, $f(x,r)=(1-\frac{r}{x})^{x} \in (0,1) > 0$ in the given range of $x$ and $r$, then we have ${\frac{df(x,r)}{dx}} > 0$. This proves that $f(x,r)$ monotonically increases with the increase of $x$. The upper bound of $f(x,r)$ should be:
+\begin{equation}
+\begin{split}
+f(x,r)_{max} &= f(x,r)_{x \rightarrow +\infty} \\
+&= (1-\frac{r}{x})^{x} _{x \rightarrow +\infty} \\
+\end{split}
+\end{equation}
+According to the definition of $e$, $e^k = \lim_{n \rightarrow +\infty} (1+\frac{k}{n})^{n}$, then $f(x,r)_{max} = e^{-r}$.
+From here, we can conclude that:
+\begin{equation}
+\begin{split}
+P_{m=1}^{\:detect,\mathit{diff}} = g(x,r) &= r - 1 + (1-\frac{r}{x})^{x} \\
+&= r - 1 + f(x,r) \\
+&< r - 1 + e^{-r} \\
+\end{split}
+\end{equation}
+To find out the trend of $g(x,r)_{max}$ according to the change of $r$, we derive $g(x,r)$ with r:
+\begin{equation}
+\begin{split}
+g(x,r)_{max} &= r - 1 + e^{-r} \\
+\frac{dg(x,r)_{max} }{dr} &= 1 - e^{-r} \in (0, 1-\frac{1}{e}) > 0 \\
+\end{split}
+\end{equation}
+This shows that $g(x,r)_{max}$ increases monotonically with the increase of $r$. The largest possible value of $P_{m=1}^{\:detect,\mathit{diff}}$ is $g(x,r)_{max}(r=1^-) = \frac{1}{e} \approx 0.368$. When $r = 10\%$, the upper bound of $P_{m=1}^{\:detect,\mathit{diff}}$ is around $0.005$, and when $r = 20\%$, the upper bound of $P_{m=1}^{\:detect,\mathit{diff}}$ is around $0.019$.
+
+
+\begin{comment}
+\begin{equation}
+\label{diff}
+\begin{split}
+P_{m=1}^{\:detect, diff} &= P_{m=1}^{\:detect, c}-P_{m=1}^{\:detect, d} \\
+&= r_{l,i} - 1 + (1-\frac{r}{N-1})^{({N}-1)} \\
+&= r - 1 + \sum_{p=0}^{N-1} \binom{N-1}{p} (-\frac{r}{N-1})^p \\
+&\text{Pull out the terms of p=0 and p=1:} \\
+&= r - 1 + 1 - r  \\
+&\;\;\; + \sum_{p=2}^{N-1} \binom{N-1}{p} (- \frac{r}{N-1})^p \\
+&= (-r)^2 \frac{1}{(N-1)^2} \frac{(N-1)(N-2)}{2!} \\
+%&\;\;\;+ (-\frac{R_{l,i}}{K_{l,i}})^3 \frac{1}{(N-1)^3} \frac{(N-1)(N-2)(N-3)}{3!}\\
+&\;\;\; + ... ... \\
+&\;\;\;+ (-r)^{N-1} \frac{1}{(N-1)^{N-1}}  \\
+&< (-r)^2 \frac{1}{2!} + ... ... + (-r)^{N-1} \frac{1}{(N-1)!} \\
+%+ (-\frac{R_{l,i}}{K_{l,i}})^3 \frac{1}{3!} + (-\frac{R_{l,i}}{K_{l,i}})^4 \frac{1}{4!} \\
+\end{split}
+\end{equation}
+With Taylor expansion $e^x=1+\frac{x^1}{1!}+\frac{x^2}{2!}+ ......$, the formula \ref{diff} can be further simplified:
+%
+%
+\begin{equation}
+\label{P_diff_results}
+\begin{split}
+P_{m=1}^{\:detect, diff} &< e^{-r} - ( 1 + \frac{(-r)^1}{1!})- f(N, r) \\
+f(N, r) &= (\frac{(-r)^{N}}{N!} + \frac{(-r)^{N+1}}{(N+1)!}+......\;) \\
+%&= e^{-\frac{R_{l,i}}{K_{l,i}}} - 1 + \frac{R_{l,i}}{K_{l,i}}\;\;\;\;\;(0<\frac{R_{l,i}}{K_{l,i}}<1) \\
+\end{split}
+\end{equation}
+As we know, $r$ is a rational number between 0 and 1, while $N$ is an integer number greater than $2$. Then, the absolute value of term $\frac{(-r)^{k}}{k!}$ will increase when $k$ increases, and it will be positive if $k$ is an even number, and negative if odd. Therefore, for Eq. \ref{P_diff_results}, if $N$ is an even number, then $f(N, r)$ will be positive, as the first term $\frac{(-r)^{N}}{N!}$ is a positive term with the largest absolute value. 
+Then we have:
+\begin{equation}
+\label{P_diff_Nl_even}
+\begin{split}
+P_{m=1}^{\:detect, diff} &< e^{-r} - ( 1 + \frac{(-r)^1}{1!}) \\
+&=  e^{-r} - 1 + r \\
+\end{split}
+\end{equation}
+Assume $f_{even}(r)=e^{-r} - 1 + r$. To find the range for it, derivative is performed:
+\begin{equation}
+\label{P_diff_Nl_even_derivative}
+\begin{split}
+f_{even}^{\;'}(r) &= -e^{-r} + 1 \in (0, \;1-\frac{1}{e}) > 0\\
+\end{split}
+\end{equation}
+The fact that $f_{even}^{\;'}(r)>0$ indicates $f_{even}(r)$ increases monotonically. Thus, the upperbound of $P_{m=1}^{\:detect, diff}$ will be $f_{even}(r=1)=\frac{1}{e}$.
+
+
+However, if $N$, is an odd number, then:
+\begin{equation}
+\label{P_diff_Nl_odd}
+\begin{split}
+f(N, r) &= (\frac{(-r)^{N}}{N!} + \frac{(-r)^{N+1}}{(N+1)!}+......\;) \\
+&> \frac{(-r)^{N}}{N!} \\
+\text{Therefore, we have}\\
+P_{m=1}^{\:detect, diff} &< e^{-r} - ( 1 + \frac{(-r)^1}{1!}) -\frac{(-r)^{N}}{N!} \\
+&= e^{-r} - 1 + r - \frac{(-r)^{N}}{N!}
+\end{split}
+\end{equation}
+Assume $f_{odd}(r)=e^{-r} - 1 + r - \frac{(-r)^{N}}{N!}$:
+\begin{equation}
+\label{P_diff_Nl_odd_derivative}
+\begin{split}
+f_{odd}^{\;'}(r) &= -e^{-r} + 1 + \frac{(-r)^{N-1}}{(N-1)!} \\
+\end{split}
+\end{equation}
+Becuase the range of $r$ is from 0 to 1, the smallest possible value for $e^{-r}$ is $\frac{1}{e}$. In addition, $N-1$ is an even number. This shows that $f_{odd}^{\;'}(r) > 1-\frac{1}{e} > 0$, it further indicates $f_{odd}(r)$ increases monotonically, and has an upperbound equal to $\frac{1}{e}+\frac{1}{N!}$.
+\end{comment}
+
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigconf.tex'.
